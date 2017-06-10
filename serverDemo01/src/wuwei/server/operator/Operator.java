@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Operator {
 
-		public static ArrayList<String> execCmd(String cmdHead,String cmdBody) throws AWTException{
+		public static ArrayList<String> execCmd(String cmdHead,String cmdBody) throws Exception{
 			
 			ArrayList<String> msgBackList=new ArrayList<String>();
 			//dir:开头的命令
@@ -22,12 +22,12 @@ public class Operator {
 			//open:开头的命令 cmdBody必须是绝对路径
 			if(cmdHead.equals("open")){
 				System.out.println("[TEST-OPEN] "+cmdBody);
-				msgBackList=OPEN.exe(cmdBody);
+				msgBackList=new OPEN().exe(cmdBody);
 			}
 			//key:开头的热键操作
 			if(cmdHead.equals("key")){
 				System.out.println("[TEST-KEY] "+cmdBody);
-				msgBackList=KEY.exe(cmdBody);
+				msgBackList=new KEY().exe(cmdBody);
 			}
 			
 			if(cmdHead.equals("mov")){

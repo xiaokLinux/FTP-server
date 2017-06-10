@@ -15,8 +15,6 @@ import java.util.ArrayList;
 
 import wuwei.server.operator.Operator;
 
-import jdk.internal.org.xml.sax.InputSource;
-
 public class CmdServerSocketThread extends Thread {
 
 	int port=8023;
@@ -64,11 +62,10 @@ public class CmdServerSocketThread extends Thread {
 				System.out.println("[TEST] Client connect From:"+inetAddress.getHostAddress()+"\t"+inetAddress.getHostName());
 				try{
 					getAndDealCmd(socket);//接受处理命令
-					writeBackMsg(socket);//回写
 				}catch(Exception e){
-					cmdFail(e.toString());//若出错，则在msgBackList中存放错误信息
-					writeBackMsg(socket);//回写
+					cmdFail(e.toString());//若出错，则在msgBackList中存放错误信息					
 				}
+				writeBackMsg(socket);//回写
 				bufferedReader.close();
 				writer.close();
 				socket.close();
@@ -77,11 +74,12 @@ public class CmdServerSocketThread extends Thread {
 			} catch (IOException e) {
 				// TODO: handle exception
 				e.printStackTrace();
+				close();//serverSocket关闭,退出死循环，线程结束	
 				System.out.println("[CRASH] "+e.toString());
 			}
 		}
 	}
-	private void getAndDealCmd(Socket socket) throws IOException, AWTException {
+	private void getAndDealCmd(Socket socket) throws Exception {
 		// TODO Auto-generated method stub
 		ArrayList<String> cmdList=readSocketMsg(socket);
 		if(cmdList.size()==1){
@@ -90,7 +88,7 @@ public class CmdServerSocketThread extends Thread {
 			processCmd(cmd);
 		}
 	}
-	private void processCmd(String cmd) throws AWTException {
+	private void processCmd(String cmd) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("[TEST] Client cmd:"+cmd);
 		int splitIdx=cmd.indexOf(":");

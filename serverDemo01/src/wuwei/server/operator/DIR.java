@@ -21,20 +21,6 @@ public class DIR extends BaseOperator{
 		File[] listFiles;
 		boolean isRoot=false;
 		if(cmdBody.equals("...")){
-//			/**
-//			 * 列出根目录
-//			 */
-//			Desktop dp=Desktop.getDesktop();
-//			try{
-//				File[] rootdirs=File.listRoots();
-//				 for(int i=0;i<rootdirs.length;i++)
-//				 {
-//					 ackMsg.add(rootdirs[i]+">"+rootdirs[i].length()+">");
-//					 System.out.println("[MSG] "+rootdirs[i]+">"+rootdirs[i].length());
-//				 }
-//			}catch(Exception e){
-//				e.printStackTrace();
-//			}
 			isRoot=true;
 			ackMsg.add("");
 		}else if(cmdBody.equals("..")){
@@ -47,27 +33,6 @@ public class DIR extends BaseOperator{
 			/**
 			 * 正常返回目录
 			 */
-//			try{
-//				File file=new File(cmdBody);
-//				File[] listFiles=file.listFiles();
-//				ackMsg.add(cmdBody+"//");//当前路径
-//				for(File mfile:listFiles){
-//					String fileName=mfile.getName();
-//					long lastModified=mfile.lastModified();
-//					SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//					String fileDate=dateFormat.format(new Date(lastModified));
-//					String fileSize="0";
-//					String isDir="1";
-//					if(!mfile.isDirectory()){
-//						isDir="0";
-//						fileSize=""+mfile.length();
-//					}
-//					ackMsg.add(fileName+">"+fileDate+">"+fileSize+">"+isDir+">");
-//					System.out.println("[MSG] "+fileName+">"+fileDate+">"+fileSize+">"+isDir+">");
-//				}			
-//			}catch(Exception e){
-//				throw e;
-//			}
 			file=new File(cmdBody);
 		}	
 		if(isRoot){
@@ -85,7 +50,54 @@ public class DIR extends BaseOperator{
 				ackMsg.add(fileName+">"+fileDate+">"+fileSize+">"+isDir+">");
 				
 			}
+		}else{
+			String pwd="";
+			try {
+				//当前路径
+				pwd=file.getCanonicalPath();
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			System.out.println("pwd="+pwd);
+			ackMsg.add(pwd);
+			ackMsg.add("..."+">"+""+">"+"0"+">"+"1"+">");//占行，显示根目录
+			String[] pwdSplits=pwd.split("/");
+			String[] pwdSplits2=pwd.split("\\\\");
+			if(pwdSplits.length>1 | pwdSplits2.length>1){
+				//判断是否是一级目录，若是二级以上目录显示。。
+				ackMsg.add(".."+">"+""+">"+"0"+">"+"1"+">");
+			}
+			listFiles=file.listFiles();
+			if(listFiles!=null){
+				for(File mfile:listFiles){
+					if(!mfile.canRead()){
+						System.out.println("here");
+						continue;
+					}
+					String fileName=mfile.getName();
+					long lastModified=mfile.lastModified();
+					SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String fileDate=dateFormat.format(new Date(lastModified));//获取文件修改时间
+					String fileSize="0";
+					String isDir="1";
+					if(!mfile.isDirectory()){
+						isDir="0";
+						fileSize=""+mfile.length();
+					}
+					ackMsg.add(fileName+">"+fileDate+">"+fileSize+">"+isDir+">");
+				}
+			}
 		}
 		return ackMsg;				
+	}
+	public boolean checkCanAccess(File f){
+		if(f.canRead()){
+			return false;
+		}
+		if(f.isHidden()){
+			return false;
+		}
+		return true;
 	}
 }
