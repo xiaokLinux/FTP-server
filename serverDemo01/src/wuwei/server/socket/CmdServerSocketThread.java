@@ -86,6 +86,12 @@ public class CmdServerSocketThread extends Thread {
 			String cmd=cmdList.get(0);
 			System.out.println("[TEST] cmd:"+cmd);
 			processCmd(cmd);
+		}else if(cmdList.size()>1){
+			for(int i=0;i<cmdList.size();i++){
+				String cmd=cmdList.get(i);
+				System.out.println("[TEST] cmd:"+cmd);
+				processCmd(cmd);
+			}
 		}
 	}
 	private void processCmd(String cmd) throws Exception {
@@ -98,7 +104,7 @@ public class CmdServerSocketThread extends Thread {
 		}
 		String cmdHead=cmd.substring(0,splitIdx);
 		String cmdBody=cmd.substring(splitIdx+1);
-		msgBackList=Operator.execCmd(cmdHead.toLowerCase(), cmdBody);//命令前缀统一为小写
+		msgBackList.addAll(Operator.execCmd(cmdHead.toLowerCase(), cmdBody));//命令前缀统一为小写
 	}
 	private void cmdFail() {
 		// TODO Auto-generated method stub

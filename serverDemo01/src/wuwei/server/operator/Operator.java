@@ -46,6 +46,24 @@ public class Operator {
 				System.out.println("[TEST-ROL] "+cmdBody);
 				msgBackList=new ROL().exe(cmdBody);
 			}
+			
+			//cmd
+			if(cmdHead.equals("cmd")){
+				System.out.println("[TEST-CMD] "+cmdBody);
+				msgBackList=new CMD().exe(cmdBody);
+			}
+			if(cmdHead.equals("for")){
+				System.out.println("[TEST-FOR] "+cmdBody);
+				msgBackList=new CMD().FOR(cmdBody);
+			}
+			if(cmdHead.equals("slp")){
+				System.out.println("[TEST-SLP] "+cmdBody);
+				msgBackList=new CMD().slp(cmdBody);
+			}
+			if(cmdHead.equals("cps")){
+				System.out.println("[TEST-CPS] "+cmdBody);
+				msgBackList=new CMD().cps(cmdBody);
+			}
 			return msgBackList;
 		}
 }

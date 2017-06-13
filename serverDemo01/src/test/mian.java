@@ -1,5 +1,8 @@
 package test;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.File;
 import java.text.DecimalFormat;
 
@@ -12,20 +15,8 @@ public class mian {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		File[] rootdirs=File.listRoots();
-		 for(int i=0;i<rootdirs.length;i++)
-		    {
-		      System.out.println("下面是"+rootdirs[i]+"分区的搜索");
-		}
-		// TODO Auto-generated method stub
-//		FileSystemView fsv = FileSystemView.getFileSystemView();	
-//		File[] fs = File.listRoots();
-//		for (int i = 0; i < fs.length; i++) {
-//            System.out.println(fsv.getSystemDisplayName(fs[i]));
-//            System.out.print("总大小" + FormetFileSize(fs[i].getTotalSpace()));
-//            System.out.println("剩余" + FormetFileSize(fs[i].getFreeSpace()));
-//        }
-		
+		myclip();
+		System.out.println("over");
 	}
 
 	private static String FormetFileSize(long fileS) {
@@ -43,5 +34,13 @@ public class mian {
         }
         return fileSizeString;
 	}
-
+	public static void myclip(){
+		String refContent="android2";
+		String vc = refContent.trim();  
+	    StringSelection ss = new StringSelection(vc);  
+	      
+	    Clipboard sysClb=null;  
+	    sysClb = Toolkit.getDefaultToolkit().getSystemClipboard();  
+	    sysClb.setContents(ss,null);  
+	}
 }
