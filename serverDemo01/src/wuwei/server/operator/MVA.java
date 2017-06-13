@@ -29,13 +29,11 @@ public class MVA extends BaseOperator {
 			int screenHeight = dimension.height;               // 获得屏幕的高度
 			int screenWidth = dimension.width;                 // 获得屏幕的宽度
 			final Robot rb=new Robot();
-			int ia=(int)a;
-			int ib=(int)b;
-			if(ia>1 || ib>1){
+			if(a>1 || b>1){
 				//有 一个整数
 				//计算移动后的点坐标
-				int wx=ia;
-				int wy=ib;
+				int wx=(int) a;
+				int wy=(int) b;
 				//越界判断，鼠标坐标落在屏幕外面
 				if(wx<0){
 					wx=0;
@@ -53,10 +51,12 @@ public class MVA extends BaseOperator {
 
 				System.out.println("[CHECK POS] int a  and int b");
 				rb.mouseMove(wx, wy);
+				MOV.setPx(wx);
+				MOV.setPy(wy);
 			}else{
 				//比例移动
-				int wx=screenWidth*ia;
-				int wy=screenHeight*ib;
+				int wx=(int) (screenWidth*a);
+				int wy=(int) (screenHeight*b);
 				//越界判断，鼠标坐标落在屏幕外面
 				if(wx<0){
 					wx=0;
@@ -73,9 +73,11 @@ public class MVA extends BaseOperator {
 				//移动鼠标，并且更新鼠标的做坐标
 				System.out.println("[CHECK POS] both a or b not int ");
 				rb.mouseMove(wx, wy);
+				MOV.setPx(wx);
+				MOV.setPy(wy);
 			}
 		}
-		ackMsg.add("MOV:"+cmdBody);
+		ackMsg.add("MVA:"+cmdBody);
 		return ackMsg;
 	}
 

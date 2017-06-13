@@ -19,6 +19,26 @@ public class MOV extends BaseOperator{
 	private static int px=0,py=0;
 	
 
+	public static int getPx() {
+		return px;
+	}
+
+
+	public static void setPx(int px) {
+		MOV.px = px;
+	}
+
+
+	public static int getPy() {
+		return py;
+	}
+
+
+	public static void setPy(int py) {
+		MOV.py = py;
+	}
+
+
 	public  ArrayList<String> exe(String cmdBody) throws AWTException{
 		ArrayList<String> ackMsg=new ArrayList<String>();//·µ»ØÖµ
 		int splitId=cmdBody.indexOf(",");
