@@ -81,7 +81,8 @@ public class MOV extends BaseOperator{
 			rb.mouseMove(px, py);	
 			
 		}
-		ackMsg.add("MOV:"+cmdBody);
+		ackMsg.add("ok");
+		ackMsg.add("MOV(now):"+px+","+py);
 		return ackMsg;
 	}
 //	class myMouseMonListernr implements MouseMotionListener{

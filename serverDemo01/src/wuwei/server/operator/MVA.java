@@ -77,7 +77,8 @@ public class MVA extends BaseOperator {
 				MOV.setPy(wy);
 			}
 		}
-		ackMsg.add("MVA:"+cmdBody);
+		ackMsg.add("ok");
+		ackMsg.add("MVA(now):"+MOV.getPx()+","+MOV.getPy());
 		return ackMsg;
 	}
 
