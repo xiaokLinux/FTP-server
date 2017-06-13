@@ -38,6 +38,14 @@ public class Operator {
 				System.out.println("[TEST-MVA] "+cmdBody);
 				msgBackList=new MVA().exe(cmdBody);
 			}
+			if(cmdHead.equals("clk")){
+				System.out.println("[TEST-CLK] "+cmdBody);
+				msgBackList=new CLK().exe(cmdBody);
+			}
+			if(cmdHead.equals("rol")){
+				System.out.println("[TEST-ROL] "+cmdBody);
+				msgBackList=new ROL().exe(cmdBody);
+			}
 			return msgBackList;
 		}
 }
