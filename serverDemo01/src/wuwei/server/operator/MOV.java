@@ -57,52 +57,29 @@ public class MOV extends BaseOperator{
 			final Robot rb=new Robot();
 			int ia=(int)a;
 			int ib=(int)b;
-			if(ia>1 || ib>1){
-				//有 一个整数
-				//计算移动后的点坐标
-				int wx=px+ia;
-				int wy=py+ib;
-				//越界判断，鼠标坐标落在屏幕外面
-				if(wx<0){
-					wx=0;
-				}
-				if(wx>screenWidth){
-					wx=screenWidth;
-				}
-				if(wy<0){
-					wy=0;
-				}
-				if(wy>screenHeight){
-					wy=screenHeight;
-				}
-				//移动鼠标，并且更新鼠标的做坐标
-				px=wx;
-				py=wy;
-				System.out.println("[CHECK POS] int a  and int b");
-				rb.mouseMove(px, py);
-			}else{
-				//比例移动
-				int wx=screenWidth*ia;
-				int wy=screenHeight*ib;
-				//越界判断，鼠标坐标落在屏幕外面
-				if(wx<0){
-					wx=0;
-				}
-				if(wx>screenWidth){
-					wx=screenWidth;
-				}
-				if(wy<0){
-					wy=0;
-				}
-				if(wy>screenHeight){
-					wy=screenHeight;
-				}
-				//移动鼠标，并且更新鼠标的做坐标
-				px=wx;
-				py=wy;
-				System.out.println("[CHECK POS] both a or b not int ");
-				rb.mouseMove(px, py);
+			
+			//计算移动后的点坐标
+			int wx=px+ia;
+			int wy=py+ib;
+			//越界判断，鼠标坐标落在屏幕外面
+			if(wx<0){
+				wx=0;
 			}
+			if(wx>screenWidth){
+				wx=screenWidth;
+			}
+			if(wy<0){
+				wy=0;
+			}
+			if(wy>screenHeight){
+				wy=screenHeight;
+			}
+			//移动鼠标，并且更新鼠标的做坐标
+			px=wx;
+			py=wy;
+			System.out.println("[CHECK POS] int a  and int b");
+			rb.mouseMove(px, py);	
+			
 		}
 		ackMsg.add("MOV:"+cmdBody);
 		return ackMsg;
