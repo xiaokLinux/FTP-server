@@ -29,10 +29,14 @@ public class Operator {
 				System.out.println("[TEST-KEY] "+cmdBody);
 				msgBackList=new KEY().exe(cmdBody);
 			}
-			
+			//鼠标操作集合
 			if(cmdHead.equals("mov")){
 				System.out.println("[TEST-MOV] "+cmdBody);
-				msgBackList=MOV.exe(cmdBody);
+				msgBackList=new MOV().exe(cmdBody);
+			}
+			if(cmdHead.equals("mva")){
+				System.out.println("[TEST-MVA] "+cmdBody);
+				msgBackList=new MVA().exe(cmdBody);
 			}
 			return msgBackList;
 		}

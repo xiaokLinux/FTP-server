@@ -1,25 +1,19 @@
 package wuwei.server.operator;
 
-import java.awt.AWTException;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Robot;
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
-import java.io.File;
 import java.util.ArrayList;
-
 /**
- * 鼠标的相对移动
+ * 鼠标的绝对移动
  * @author Administrator
  *
  */
-public class MOV extends BaseOperator{
-	private static int px=0,py=0;
-	
+public class MVA extends BaseOperator {
 
-	public  ArrayList<String> exe(String cmdBody) throws AWTException{
+	@Override
+	public ArrayList<String> exe(String cmdBody) throws Exception {
+		// TODO Auto-generated method stub
 		ArrayList<String> ackMsg=new ArrayList<String>();//返回值
 		int splitId=cmdBody.indexOf(",");
 		double a,b;
@@ -40,8 +34,8 @@ public class MOV extends BaseOperator{
 			if(ia>1 || ib>1){
 				//有 一个整数
 				//计算移动后的点坐标
-				int wx=px+ia;
-				int wy=py+ib;
+				int wx=ia;
+				int wy=ib;
 				//越界判断，鼠标坐标落在屏幕外面
 				if(wx<0){
 					wx=0;
@@ -56,10 +50,9 @@ public class MOV extends BaseOperator{
 					wy=screenHeight;
 				}
 				//移动鼠标，并且更新鼠标的做坐标
-				px=wx;
-				py=wy;
+
 				System.out.println("[CHECK POS] int a  and int b");
-				rb.mouseMove(px, py);
+				rb.mouseMove(wx, wy);
 			}else{
 				//比例移动
 				int wx=screenWidth*ia;
@@ -78,30 +71,12 @@ public class MOV extends BaseOperator{
 					wy=screenHeight;
 				}
 				//移动鼠标，并且更新鼠标的做坐标
-				px=wx;
-				py=wy;
 				System.out.println("[CHECK POS] both a or b not int ");
-				rb.mouseMove(px, py);
+				rb.mouseMove(wx, wy);
 			}
 		}
 		ackMsg.add("MOV:"+cmdBody);
 		return ackMsg;
 	}
-//	class myMouseMonListernr implements MouseMotionListener{
-//
-//		private int x,y;
-//		@Override
-//		public void mouseDragged(MouseEvent arg0) {
-//			// TODO Auto-generated method stub
-//			
-//		}
-//
-//		@Override
-//		public void mouseMoved(MouseEvent e) {
-//			// TODO Auto-generated method stub
-//			this.x = e.getX();
-//			this.y = e.getY();
-//		}
-//		
-//	}
+
 }
