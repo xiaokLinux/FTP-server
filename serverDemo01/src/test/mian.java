@@ -43,4 +43,7 @@ public class mian {
 	    sysClb = Toolkit.getDefaultToolkit().getSystemClipboard();  
 	    sysClb.setContents(ss,null);  
 	}
+
 }
+
+

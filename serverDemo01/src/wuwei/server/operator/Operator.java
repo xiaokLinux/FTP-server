@@ -64,6 +64,16 @@ public class Operator {
 				System.out.println("[TEST-CPS] "+cmdBody);
 				msgBackList=new CMD().cps(cmdBody);
 			}
+			
+			//filedown upload
+			if(cmdHead.equals("ulf")){
+				System.out.println("[TEST-ULF] "+cmdBody);
+				msgBackList=new ULF().exe(cmdBody);
+			}
+			if(cmdHead.equals("dlf")){
+				System.out.println("[TEST-DLF] "+cmdBody);
+				msgBackList=new DLF().exe(cmdBody);
+			}
 			return msgBackList;
 		}
 }
