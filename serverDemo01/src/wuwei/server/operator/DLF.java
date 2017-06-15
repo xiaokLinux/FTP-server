@@ -42,6 +42,7 @@ public class DLF extends BaseOperator {
 		ackMsg.add("DLF");
 		ackMsg.add(""+ftd.get_port());
 		ackMsg.add(""+ftd.get_fileLength());
+		System.out.println("port:"+ftd.get_port());
 		return ackMsg;
 	}
 	

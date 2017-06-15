@@ -82,15 +82,18 @@ public class CmdServerSocketThread extends Thread {
 	private void getAndDealCmd(Socket socket) throws Exception {
 		// TODO Auto-generated method stub
 		ArrayList<String> cmdList=readSocketMsg(socket);
+		msgBackList.clear();
 		if(cmdList.size()==1){
 			String cmd=cmdList.get(0);
 			System.out.println("[TEST] cmd:"+cmd);
 			processCmd(cmd);
+			System.out.println("single cmd");
 		}else if(cmdList.size()>1){
 			for(int i=0;i<cmdList.size();i++){
 				String cmd=cmdList.get(i);
 				System.out.println("[TEST] cmd:"+cmd);
 				processCmd(cmd);
+				System.out.println("compbol cmd");
 			}
 		}
 	}
